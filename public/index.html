@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>SubForge — Phụ đề &amp; lồng tiếng AI</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#0e1210" />
+<link rel="apple-touch-icon" href="icon-192.png" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body>
+  <div class="grain"></div>
+
+  <header class="topbar">
+    <div class="wordmark">Sub<span>Forge</span></div>
+    <div class="steps" id="steps">
+      <span class="step active" data-step="1">01 Tải video</span>
+      <span class="step" data-step="2">02 Phụ đề</span>
+      <span class="step" data-step="3">03 Dịch</span>
+      <span class="step" data-step="4">04 Lồng tiếng</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel key-panel">
+      <label for="apiKey">OpenAI API key <span class="tag">bắt buộc — phụ đề &amp; dịch</span></label>
+      <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
+
+      <label for="elKey">ElevenLabs API key <span class="tag">tuỳ chọn — nhân bản giọng gốc</span></label>
+      <input id="elKey" type="password" placeholder="xi-..." autocomplete="off" />
+      <p class="hint">Key chỉ dùng cho phiên này, không lưu lại trên server.</p>
+    </section>
+
+    <section class="panel" id="panel-upload">
+      <h2>Tải video lên</h2>
+      <label class="dropzone" id="dropzone">
+        <input type="file" id="videoInput" accept="video/*" hidden />
+        <span id="dropLabel">Kéo thả video vào đây, hoặc bấm để chọn file</span>
+      </label>
+      <button id="btnTranscribe" class="primary" disabled>Tạo phụ đề</button>
+      <p class="status" id="statusTranscribe"></p>
+    </section>
+
+    <section class="panel hidden" id="panel-subs">
+      <h2>Phụ đề gốc <span class="lang" id="srcLang"></span></h2>
+      <div class="segments" id="segmentsOriginal"></div>
+    </section>
+
+    <section class="panel hidden" id="panel-translate">
+      <h2>Dịch phụ đề</h2>
+      <div class="row">
+        <select id="targetLang">
+          <option value="Vietnamese">Tiếng Việt</option>
+          <option value="English">English</option>
+          <option value="Japanese">日本語</option>
+          <option value="Korean">한국어</option>
+          <option value="Chinese (Simplified)">中文</option>
+          <option value="French">Français</option>
+          <option value="Spanish">Español</option>
+        </select>
+        <button id="btnTranslate" class="primary">Dịch ngay</button>
+      </div>
+      <p class="status" id="statusTranslate"></p>
+      <div class="segments" id="segmentsTranslated"></div>
+      <a id="downloadSrt" class="ghost hidden" download>Tải .srt</a>
+    </section>
+
+    <section class="panel hidden" id="panel-dub">
+      <h2>Lồng tiếng AI</h2>
+      <div class="row">
+        <select id="engine">
+          <option value="clone">Nhân bản giọng gốc (ElevenLabs)</option>
+          <option value="openai">Giọng có sẵn (OpenAI)</option>
+        </select>
+        <select id="voice">
+          <option value="alloy">Alloy</option>
+          <option value="verse">Verse</option>
+          <option value="aria">Aria</option>
+          <option value="sage">Sage</option>
+        </select>
+        <button id="btnDub" class="primary">Tạo video lồng tiếng</button>
+      </div>
+      <p class="hint" id="engineHint">Nhân bản giọng gốc cần ElevenLabs API key ở trên — kết quả nghe giống người nói thật trong video, đúng hướng GenSubAI làm.</p>
+      <p class="status" id="statusDub"></p>
+      <video id="resultVideo" class="hidden" controls></video>
+      <a id="downloadVideo" class="ghost hidden" download>Tải video đã lồng tiếng</a>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

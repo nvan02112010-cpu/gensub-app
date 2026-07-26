@@ -1,0 +1,14 @@
+{
+  "name": "SubForge — Phụ đề & lồng tiếng AI",
+  "short_name": "SubForge",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0e1210",
+  "theme_color": "#0e1210",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
